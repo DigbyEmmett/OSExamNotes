@@ -2,12 +2,19 @@
 \usepackage[margin=.5in,a5paper]{geometry}
 \usepackage{multicol}
 \usepackage[dvipsnames]{xcolor}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\graphicspath{{./res/}}
 \newcommand{\answercolor}{Bittersweet}
-\newcommand{\answer}[1]{\\\\\textcolor{\answercolor}{#1}\\}
+\newcommand{\answer}[1]{\\\textcolor{\answercolor}{#1}}
+\newcommand{\answerimg}[1]{\answer{\begin{figure*}[h]\centering\includegraphics[width=.5\textwidth]{#1}\end{figure*}}}
 \begin{document}
+	\raggedright
+	\tableofcontents
 	\section{Worksheet 5}
 	\begin{enumerate}
 		\item Consider the following deadlock:
+		\answerimg{T5Q1.png}
 		\begin{enumerate}
 			\item Show that the four necessary conditions needed for deadlock hold in the traffic dead lock.
 			\item Provide a simple rule for avoiding deadlock in the example.
@@ -33,11 +40,16 @@
 			\item Process F holds W and wants S
 			\item Process G holds V and wants U
 		\end{itemize}
+	
 		\begin{enumerate}
 			\item Draw resource-allocation graph for the system
+			\answerimg{T5Q5a.jpg}
 			\item Draw the corresponding wait-for graph
+			\answerimg{T5Q5b.jpg}
 			\item Is this system deadlocked?
+			\answer{Yes, the system is deadlocked.}
 			\item If so, which processes are involved?
+			\answer{The processes involved are \textit{D,E,G}}
 		\end{enumerate}
 		\item Consider the following snapshot of a system that is using the banker’s algorithm:
 		\begin{table*}[h]
@@ -155,7 +167,7 @@
 				\item Thrashing
 				\answer{When a process does not have all of its frames in memory it may cause page faults thus loading in more pages in from secondary storage. This results in low CPU utilisation while the pages are loaded. If the CPU then increases the level of multiprogramming to compensate the same will happen again. This is known as thrashing.}
 				\item Demand Paging
-				\textcolor{Bittersweet}{Bringing an entire process (not just a page) into memory only when it is needed \& advantageous for the computer. (less IO, less memory, faster response, more users)}
+				\answer{Bringing an entire process (not just a page) into memory only when it is needed \& advantageous for the computer. (less IO, less memory, faster response, more users)}
 				\item Page Fault
 				\answer{Occurs when a page is requested but it is not found in main memory. It is necessary to load the page from virtual memory which takes additional time.}
 				\item Page Replacement
