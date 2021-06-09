@@ -1,0 +1,262 @@
+\documentclass{article}
+\usepackage[margin=.5in,a5paper]{geometry}
+\usepackage{multicol}
+\begin{document}
+	\section{Worksheet 5}
+	\begin{enumerate}
+		\item Consider the following deadlock:
+		\begin{enumerate}
+			\item Show that the four necessary conditions needed for deadlock hold in the traffic dead lock.
+			\item Provide a simple rule for avoiding deadlock in the example.
+		\end{enumerate}
+		\item List three overall strategies in handling deadlocks.
+		\item Can we break ‘mutual exclusion’ condition to prevent deadlock? Can we break ‘hold and wait’ condition? Justify your answer.
+		\item In a real computer system, neither the resources available nor the demands of processes for resources are consistent over long periods (months). Resources break or are replaced, new processes come and go, new resources are bought and added to the system. If deadlock is controlled by the banker’s algorithm, which of the following changes can be made safely (without introducing the possibility of deadlock), and under what circumstances?
+		\begin{itemize}
+			\item Increase Available (new resources added).
+			\item Decrease Available (resource permanently removed from system).
+			\item Increase Max for one process (the process needs more resources than allowed, it may want more).
+			\item Decrease Max for one process (the process decides it does not need that many resources).
+			\item Increase the number of processes.
+			\item Decrease the number of processes.
+		\end{itemize}
+		\item Consider a system with seven processes, A through G, and six resources, R through W, each with one instance. Resource ownership is as follows.
+		\begin{itemize}
+			\item Process A holds R and wants S
+			\item Process B holds nothing but wants T
+			\item Process C holds nothing but wants S
+			\item Process D holds U and wants S and T
+			\item Process E holds T and wants V
+			\item Process F holds W and wants S
+			\item Process G holds V and wants U
+		\end{itemize}
+		\begin{enumerate}
+			\item Draw resource-allocation graph for the system
+			\item Draw the corresponding wait-for graph
+			\item Is this system deadlocked?
+			\item If so, which processes are involved?
+		\end{enumerate}
+		\item Consider the following snapshot of a system that is using the banker’s algorithm:
+		\begin{table*}[h]
+			\centering
+			\begin{tabular}{ccc}
+				Allocation & Max \\
+				\begin{tabular}{lcccc}
+					& A & B & C & D \\\hline
+					$P_0$ & 0 & 0 & 1 & 2 \\
+					$P_1$ & 1 & 0 & 0 & 0 \\
+					$P_2$ & 1 & 3 & 5 & 4 \\
+					$P_3$ & 0 & 6 & 3 & 2 \\
+					$P_4$ & 0 & 0 & 1 & 4 \\
+				\end{tabular}
+				&
+				\begin{tabular}{cccc}
+					A & B & C & D \\\hline
+					0 & 0 & 1 & 2 \\
+					1 & 7 & 5 & 0 \\
+					2 & 3 & 5 & 6 \\
+					0 & 6 & 5 & 2 \\
+					0 & 6 & 5 & 5 \\
+				\end{tabular}
+			\end{tabular}
+		\end{table*}
+		\begin{table*}[h]
+			\centering
+			\begin{tabular}{c}
+				Available                     \\
+				\begin{tabular}{lcccc}
+					A & B & C & D \\\hline
+					1 & 5 & 2 & 0 \\
+				\end{tabular}
+			\end{tabular}
+		\end{table*}
+		\begin{enumerate}
+			\item What is the content of matrix Need?
+			\item Is the system in a safe state?
+			\item If a request from process P1 arrives for (0, 4, 2, 0), can the request be granted immediately?
+		\end{enumerate}
+		\item Consider a system with the following resource types:
+		\begin{itemize}
+			\item tape drives (4 units)
+			\item plotters (2 units)
+			\item printers (3 units)
+			\item CD ROMs (1 unit)
+		\end{itemize}
+		At time t, there are three processes with the following information for their resource allocations and additional resource requests:
+		\begin{itemize}
+			\item process 1: allocation - one printer, additional requests – two tape drives and one CD ROM
+			\item process 2: allocation - two tape drives and a CD ROM, additional requests – one tape drive and one printer
+			\item process 3: allocation - a plotter and two printers, additional request - two tape drives, one CD ROM, and one plotter
+		\end{itemize}
+		\begin{enumerate}
+			\item Is the system deadlocked? (Show the process sequence if the system is not deadlocked, and show the processes involved if the system is deadlocked)
+			\item Is the system deadlocked if process 3‘s additional requests include only two tape drives and one plotter?
+		\end{enumerate}
+	\end{enumerate}
+	\section{Worksheet 6}
+	\begin{enumerate}
+		\item Explain the different between internal and external fragmentation.
+		\item What are the advantages of using paging? What is contained in the page table?
+		\item Most systems allow programs to allocate more memory to its address space during execution. Data allocated in the heap segments of programs are an example of such allocated memory. What is required to support dynamic memory allocation in the following schemes:
+		\begin{itemize}
+			\item contiguous-memory allocation
+			\item pure segmentation
+			\item pure paging
+		\end{itemize}
+		\item Consider a computer with 16-bit logical address, and a page size of 4K. How many bits are there for the page number and for the offset number? How many pages are there?
+		\item Given memory partitions of 100K, 500K, 200K, 300K, and 600K (in order),
+		\begin{enumerate}
+			\item How would each of the First-fit, Best-fit, and Worst-fit algorithms place processes of 212K, 417K, 112K, and 426K (in order)?
+			\item Which algorithm makes the most efficient use of memory?
+			\item Show how compaction can be done on each
+		\end{enumerate}
+		\item 6. Consider a paging system with the page table stored in memory.
+		\begin{enumerate}
+			\item If a memory reference takes 200 nanoseconds, how long does a paged memory reference take?
+			\item If we add associative registers, and 75\% of all page-table references are found in the associative registers, what is the effective memory reference time? (Assume that finding a page-table entry in the associative registers takes zero time, if the entry is there)
+			\item Consider a logical address space of eight pages of 1024 words each, mapped onto a physical
+		\end{enumerate}
+		\item Consider a logical address space of eight pages of 1024 words each, mapped onto a physical memory of 32 frames
+		\begin{enumerate}
+			\item How many bits are there in the logical address?
+			\item How many bits are there in the physical address?
+		\end{enumerate}
+		\item Considering the following segment table, what are the physical addresses of the following logical addresses?
+		\begin{table*}[h]
+			\centering
+			\begin{tabular}{ccc}
+				Segment & Base & Length \\
+				0       & 219  & 600    \\
+				1       & 2300 & 14     \\
+				2       & 90   & 100    \\
+				3       & 1327 & 580    \\
+				4       & 1952 & 96     \\
+			\end{tabular}
+		\end{table*}
+		\begin{multicols}{2}
+			\begin{enumerate}
+				\item 0, 430
+				\item 1, 10
+				\item 2, 500
+				\item 3, 400
+				\item 4, 112\\
+			\end{enumerate}
+		\end{multicols}
+	\end{enumerate}
+	\section{Worksheet 7}
+	\begin{enumerate}
+		\item Briefly describe the following terms:
+		\begin{multicols}{2}
+			\begin{itemize}
+				\item Virtual Memory
+				\item Thrashing
+				\item Demand Paging
+				\item Page Fault
+				\item Page Replacement
+				\item Modify/dirty bit
+				\item Vaild/invalid bit
+				\item Belady's anomaly.
+				\item Prepaging
+				\item Working set model
+				\item Lock bit
+			\end{itemize}
+		\end{multicols}
+		\item When do page faults occur? Describe the actions taken by the OS when a page fault occurs
+		\item A certain computer provides its users with a virtual-memory space of 232 bytes. The computer has 218 bytes of physical memory. The virtual memory is implemented by paging, and the page size is 4096 bytes. A user process generates the virtual address 11123456H. Explain how the system establishes the corresponding physical location.
+		\item Suppose we have a demand-paged memory. The page table is held in registers. It takes 8ms to service a page faults if an empty page is available or the replaced page is not modified, and 20ms if the replaced page is modified. Memory access time is 100ns. Assume that the page to be replaced is modified 70\% of the time. What is the maximum acceptable page- fault rate for an effective access time of no more than 200ns?
+		\item Consider the following page reference string:
+		\begin{figure*}[h]
+			\centering
+			1, 2, 3, 4, 2, 1, 5, 6, 2, 1, 2, 3, 7, 6, 3, 2, 1, 2, 3, 6
+		\end{figure*}\\
+		How many page faults would occur for the following replacement algorithms, assuming one, two, three, four, five, six, or seven frames? Remember that all frames are initially empty, so your first unique pages will all cost one fault each.
+		\begin{enumerate}
+			\item LRU replacement
+			\item FIFO replacement
+			\item Optimal Replacement
+		\end{enumerate}
+		\item What cause thrashing? How does the system detect thrashing? Once it detects thrashing what can the system do to eliminate thrashing?
+		\item Consider a demand-paging system with a paging disk that has an average access and transfer time of 20 milliseconds. Addresses are translated through a page table in main memory with an access time of 1 microsecond per memory access. Thus, each memory reference through the page table takes two accesses. To improve this time, we have added an associative memory that reduces access time to one memory reference, if the page-table entry is in associative memory. Assume that 80\% of the accesses are in the associative memory, and that, of the remaining 10\% (or 2\% of the total) cause page faults. What is the effective access time?
+		\item An OS supports a paged virtual memory, using a central processor with a cycle time of 1 microsecond. It costs an additional 1 microsecond to access a page other than the current one. Pages have 1000 words, and the paging device is a drum that rotates at 3000 RPM and transfers 1 million words per second. The following statistical measurements were obtained from the system:
+		\begin{itemize}
+			\item 1 percent of all instructions executed accessed a page other than the current page.
+			\item Of the instructions that accessed another page, 80 percent accessed a page already in memory.
+			\item When a new page was required, the replaced page was modified 50 percent of the time.
+		\end{itemize}
+		Calculate the effective instruction time on the system, assuming that the system is running one process only, and that the processor is idle during drum transfers.
+		\item Consider a demand-paged computer system where the degree of multiprogramming is currently fixed at four. The system was recently measured to determine utilization of CPU and the paging disk. The results are one of the following alternatives. For each case, what is happening? Can the degree of multiprogramming be increased to increase the CPU utilization?
+		\begin{enumerate}
+			\item CPU utilization 13\%; disk utilization 97\%
+			\item CPU utilization 87\%; disk utilization 3\%
+			\item CPU utilization 13\%; disk utilization 3\%
+		\end{enumerate}
+	\end{enumerate}
+	\section{Worksheet 8}
+	\begin{enumerate}
+		\item The open-file table is used to maintain information about files that are currently open. Should the operating system maintain a separate table for each user or just maintain one table that contains references to files that are being accessed by all users at the current time? If the same file is being accessed by two different programs or users, should there be separate entries in the open file table?
+		\item Sequential access can simulate direct access, and direct access can also simulate sequential access. Which simulation is more efficient? Justify your answer.
+		\item In two-level directory, how do users access system files?
+		\item Consider a system where free space is kept in a free-space list. Suppose that the pointer to the free-space list is lost. Can the system reconstruct the free-space list? Explain your answer. Suggest a scheme to ensure that the pointer is never lost as a result of memory failure.
+		\item Consider a system that supports the strategies of contiguous, linked, and indexed allocation. What criteria should be used in deciding which strategy is best utilized for a particular file?
+		\item Consider a file currently consisting of 200 blocks. Assume that the file control block (and the index block, in the case of indexed allocation) is already in memory. Calculate how many disk I/O operations are required for contiguous, linked, and indexed (single level) allocation strategies, if for one block, the following conditions hold. In the contiguous- allocation case, assume that there is no room to grow in the beginning, but there is room to grow in the end. Assume that the block information to be added is stored in memory.
+		\begin{enumerate}
+			\item The block is added at the beginning
+			\item The block is added at the middle
+			\item The block is added at the end
+			\item The block is removed from the beginning
+			\item The block is removed from the middle
+			\item The block is removed from the end
+		\end{enumerate}
+		\item Why must the bit-map for file allocation be kept on mass storage, rather than in main memory?
+		\item Consider a file system on a disk that has both logical and physical block size of 512 bytes. Assume that the information about each file is already in memory. For each of the three allocation strategies (contiguous, linked, and indexed), answer these questions:
+		\begin{enumerate}
+			\item How is the logical-to-physical address mapping accomplished in this system? (For the indexed allocation, assume that a file is always less than 512 blocks long)
+			\item If we are currently at logical block 10 (the last block accessed was block 10) and want to access logical block 4, how many physical blocks must be read from the disk?
+		\end{enumerate}
+		
+	\end{enumerate}
+	\section{Workshop 9}
+	\begin{enumerate}
+		\item State the advantages and disadvantages of placing functionality in a device controller rather than in the kernel.
+		\item How does DMA increase system concurrency?
+		\item Describe circumstances under which blocking I/O should be used
+		\item Why not just implement non-blocking I/O and have processes busy-wait until their device is ready?
+		\item When are caches useful? What problems do they solve? What problems do they cause? If a cache can be made as large as the device for which it is caching, why not make it that large and eliminate the device?
+		\item What is the main different between a cache and a buffer?
+		\item For each of the following I/O scenarios, would you design the OS to use buffering, spooling, caching, or a combination? Would you use polled I/O, or interrupt driven I/O? Give reasons for your choices
+		\begin{enumerate}
+			\item A mouse is used with a graphical user interface
+			\item A tape drive on a multitasking OS (assume no device pre-allocations is available)
+			\item A disk drive containing user files
+			\item a graphics card with direct bus connection, accessible through memory mapped I/O.
+		\end{enumerate}
+		\item Why might a system use interrupt driven I/O to manage a single serial port, while polling I/O to manage a front-end processor, such as a terminal concentrator?
+		\item Suppose that a disk drive has 5000 cylinders, numbered 0 to 4999. The drive is currently serving a request at cylinder 143, and the previous request was at cylinder 125. The queue of pending requests, in FIFO order is
+		\begin{figure}[h]
+			\centering
+			86, 1470, 913, 1774, 948, 1509, 1022, 1750, 130
+		\end{figure}\\ Starting from the current head position, what is the total distance (in cylinders) that the disk arm moves to satisfy all the pending requests, for each of the following disk-scheduling algorithms?
+		\begin{enumerate}
+			\item FCFS
+			\item SSTF
+			\item SCAN
+			\item LOOK
+			\item C-SCAN
+			\item C-LOOK
+		\end{enumerate}
+		\item Explain why SSTF scheduling tends to favour middle cylinders over the innermost and outermost cylinders.
+		\item Briefly explain the differences among the six levels for RAID, showing how each improve reliability, access time, and I/O rate.
+		\item RAID level 3 is able to correct single-bit errors using only one parity-drive. What is the point of RAID level 2?
+	\end{enumerate}
+	\section{Worksheet 10}
+	\begin{enumerate}
+		\item What is the need to know principle? Why is it important for a protection system to adhere to this principle?
+		\item Why is the separation of mechanism and policy a desirable property?
+		\item What are the main differences between capability lists and access lists?
+		\item Capability lists are usually kept within the address space of the user. How does the system ensure that the user cannot modify the contents of the list?
+		\item Buffer-overflow attacks can be avoided by adopting a better programming methodology or by using special hardware support. Discuss these solutions.
+		\item Attacks from inside the system (by somebody that has already been logged in, legally or illegally) can be, among the few, in the forms of Trojan Horses, Login Spoofing, Logic Bombs, and trap doors. Explain how each work, and ways to prevent them, if possible.
+		\item What is the purpose of using a “salt” along with the user-provided password? Where should the “salt” be stored, and how should it be used?
+		\item When a file is removed, its blocks are generally put back on the free list, but they are not erased. Do you think it would be a good idea to have the OS erases each block before releasing it? Consider both security and performance factors in your answer, and explain the effect of each.
+	\end{enumerate}
+\end{document}
