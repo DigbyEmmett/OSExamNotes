@@ -4,9 +4,10 @@
 \usepackage[dvipsnames]{xcolor}
 \usepackage{graphicx}
 \usepackage{hyperref}
+\usepackage{amsmath}
 \graphicspath{{./res/}}
 \newcommand{\answercolor}{Bittersweet}
-\newcommand{\answer}[1]{\\\textcolor{\answercolor}{#1}}
+\newcommand{\answer}[1]{{\\\color{\answercolor}\footnotesize\itshape{#1}}}
 \newcommand{\answerimg}[1]{\answer{\begin{figure*}[h]\centering\includegraphics[width=.5\textwidth]{#1}\end{figure*}}}
 \begin{document}
 	\raggedright
@@ -17,18 +18,26 @@
 		\answerimg{T5Q1.png}
 		\begin{enumerate}
 			\item Show that the four necessary conditions needed for deadlock hold in the traffic dead lock.
+			\answer{The four necessary conditions for a deadlock are (1) mutual exclu- sion; (2) hold-and-wait; (3) no preemption; and (4) circular wait. The mutual exclusion condition holds as only one car can occupy a space in the roadway. Hold-and-wait occurs where a car holds onto their place in the roadway while they wait to advance in 47 the roadway. A car cannot be removed (i.e. preempted) from its position in the roadway. Lastly, there is indeed a circular wait as each car is waiting for a subsequent car to advance. The circular wait condition is also easily observed from the graphic.}
 			\item Provide a simple rule for avoiding deadlock in the example.
+			\answer{A simple rule that would avoid this traffic deadlock is that a car may not advance into an intersection if it is clear they will not be able to immediately clear the intersection. }
 		\end{enumerate}
 		\item List three overall strategies in handling deadlocks.
 		\item Can we break ‘mutual exclusion’ condition to prevent deadlock? Can we break ‘hold and wait’ condition? Justify your answer.
 		\item In a real computer system, neither the resources available nor the demands of processes for resources are consistent over long periods (months). Resources break or are replaced, new processes come and go, new resources are bought and added to the system. If deadlock is controlled by the banker’s algorithm, which of the following changes can be made safely (without introducing the possibility of deadlock), and under what circumstances?
 		\begin{itemize}
 			\item Increase Available (new resources added).
+			\answer{This could safely be changed without any problems.}
 			\item Decrease Available (resource permanently removed from system).
+			\answer{This could have an effect on the system and introduce the possibility of deadlock as the safety of the system assumed there were a certain number of available resources.}
 			\item Increase Max for one process (the process needs more resources than allowed, it may want more).
+			\answer{This could have an effect on the system and introduce the possibility of deadlock.}
 			\item Decrease Max for one process (the process decides it does not need that many resources).
+			\answer{This could safely be changed without any problems.}
 			\item Increase the number of processes.
+			\answer{This could be allowed assuming that resources were allocated to the new process(es) such that the system does not enter an unsafe state.}
 			\item Decrease the number of processes.
+			\answer{This could safely be changed without any problems.}
 		\end{itemize}
 		\item Consider a system with seven processes, A through G, and six resources, R through W, each with one instance. Resource ownership is as follows.
 		\begin{itemize}
@@ -40,7 +49,7 @@
 			\item Process F holds W and wants S
 			\item Process G holds V and wants U
 		\end{itemize}
-	
+
 		\begin{enumerate}
 			\item Draw resource-allocation graph for the system
 			\answerimg{T5Q5a.jpg}
@@ -87,8 +96,27 @@
 		\end{table*}
 		\begin{enumerate}
 			\item What is the content of matrix Need?
+			\answer{
+				\begin{table}[h]
+					\centering
+					\color{\answercolor}
+					\begin{tabular}{c}
+						Need \\
+						\begin{tabular}{lcccc}
+							 	  & A & B & C & D \\
+							$P_0$ & 0 & 0 & 0 & 0 \\
+							$P_1$ & 0 & 7 & 5 & 0 \\
+							$P_2$ & 1 & 0 & 0 & 2 \\
+							$P_3$ & 0 & 0 & 2 & 0 \\
+							$P_4$ & 0 & 6 & 4 & 1 \\
+						\end{tabular}
+					\end{tabular}
+				\end{table}
+			}
 			\item Is the system in a safe state?
+			\answer{Yes! $P_0 \rightarrow P_3 \rightarrow P_2 \rightarrow P_1 \rightarrow P_4$}
 			\item If a request from process P1 arrives for (0, 4, 2, 0), can the request be granted immediately?
+			\answer{Yes! $P_0 \rightarrow P_3 \rightarrow P_4 \rightarrow P_2 \rightarrow P_1$}
 		\end{enumerate}
 		\item Consider a system with the following resource types:
 		\begin{itemize}
@@ -105,13 +133,17 @@
 		\end{itemize}
 		\begin{enumerate}
 			\item Is the system deadlocked? (Show the process sequence if the system is not deadlocked, and show the processes involved if the system is deadlocked)
+			\answer{The system is deadlocked due to $P_1$ and $P_3$}
 			\item Is the system deadlocked if process 3‘s additional requests include only two tape drives and one plotter?
+			\answer {This successfully resolves the deadlock $P_0 \rightarrow P_3 \rightarrow P_2 \rightarrow P_1$}
 		\end{enumerate}
 	\end{enumerate}
 	\section{Worksheet 6}
 	\begin{enumerate}
 		\item Explain the different between internal and external fragmentation.
+        \answerimg{T6Q1}
 		\item What are the advantages of using paging? What is contained in the page table?
+        \answer{paging is a method of minimising fragmentation. It involves including }
 		\item Most systems allow programs to allocate more memory to its address space during execution. Data allocated in the heap segments of programs are an example of such allocated memory. What is required to support dynamic memory allocation in the following schemes:
 		\begin{itemize}
 			\item contiguous-memory allocation
@@ -154,7 +186,7 @@
 				\item 1, 10
 				\item 2, 500
 				\item 3, 400
-				\item 4, 112\\
+				\item 4, 112
 			\end{enumerate}
 		\end{multicols}
 	\end{enumerate}
@@ -171,16 +203,52 @@
 				\item Page Fault
 				\answer{Occurs when a page is requested but it is not found in main memory. It is necessary to load the page from virtual memory which takes additional time.}
 				\item Page Replacement
+                \answer{The process which is followed to move a frame which is currently not in use to virtual memory, swapping it with another page which is stored in virtual memory.}
 				\item Modify/dirty bit
+                \answer{Modify or dirty bit indicates the page under observation has been modified and needs to be stored back on the virtual memory disk to allow the process which owns it to retrieve it later. If the modified bit is not set then the process has not used the page and it does not need to be copied into swap space as there is already a valid copy there.}
 				\item Vaild/invalid bit
+                \answer{Indicates if the current page has been loaded from the disk or not. If it has been loaded from the disk then it is valid. If not then it is invalid and needs to be loaded again.}
 				\item Belady's anomaly.
+                \answer{Belady's anomaly is the anomaly observed when increasing the number of frames for a given process. The assumption is that more frames means more hits and therefore improved performance. When in fact the opposite is true.}
 				\item Prepaging
+                \answer{refers to a operating system loading the page working set back into main memory to prevent an influx of page faults when context switching (this would cause low CPU utilisation)}
 				\item Working set model
+                \answer{The working set model is a model which describes the most recently used pages for a program. there are a number of ways to figure this out but the generally accepted way is to define a window $\Delta$ which is the number of past requests to review in order to determine which pages should be included in the working set.}
 				\item Lock bit
+                \answer{A lock bit is present on a frame. it indicates that that frame cannot be swapped into virtual memory. an example of this may be the driving code for an operating system as performance would be severely affected if it had to load this from virtual memory every few minutes.}
 			\end{itemize}
 		\item When do page faults occur? Describe the actions taken by the OS when a page fault occurs
-		\item A certain computer provides its users with a virtual-memory space of 232 bytes. The computer has 218 bytes of physical memory. The virtual memory is implemented by paging, and the page size is 4096 bytes. A user process generates the virtual address 11123456H. Explain how the system establishes the corresponding physical location.
-		\item Suppose we have a demand-paged memory. The page table is held in registers. It takes 8ms to service a page faults if an empty page is available or the replaced page is not modified, and 20ms if the replaced page is modified. Memory access time is 100ns. Assume that the page to be replaced is modified 70\% of the time. What is the maximum acceptable page- fault rate for an effective access time of no more than 200ns?
+        \answer{
+        a page fault occurs when a page which was previously loaded in to memory was subsequentially swapped to the backing store and the was paged again. The process the Operating system follows for dealing with a page fault is as follows:
+        \begin{enumerate}
+            \item OS checks if the reference is valid, if invalid terminate with an error
+            \item otherwise find a free frame using the free frame list
+            \item schedule a disk read operation to read the page into the target frames
+            \item modify the page table appropriately
+            \item restart instruction which was interrupted by page fault.
+        \end{enumerate}
+        }
+		\item A certain computer provides its users with a virtual-memory space of $2^{32}$ bytes. The computer has $2^{18}$ bytes of physical memory. The virtual memory is implemented by paging, and the page size is 4096 bytes. A user process generates the virtual address 11123456H. Explain how the system establishes the corresponding physical location.
+        \answer{
+        The virtual address in binary form is
+        \begin{figure}
+            \centering
+            0001 0001 0001 0010 0011 0100 0101 0110
+        \end{figure}
+        Since the page size is $2^{12} \equiv 4kB$  , the page table size is $2^{20}$. Therefore the low order 12 bits “0100 0101 0110” are used as the displacement into the page, while the remaining 20 bits “0001 0001 0001 0010 0011” are used as the displacement in the page table to find the frame.
+        }
+		\item Suppose we have a demand-paged memory. The page table is held in registers. It takes 8ms to service a page faults if an empty page is available or the replaced page is not modified, and 20ms if the replaced page is modified. Memory access time is 100ns. Assume that the page to be replaced is modified 70\% of the time. What is the maximum acceptable page fault rate for an effective access time of no more than 200ns?
+        \answer{
+            \begin{equation*}
+                \begin{gathered}
+                    EAT(\alpha)=\alpha\cdot\bigg(\big(8ms\big)\cdot30\%+\big(20ms\big)\cdot70\%\bigg)+\big(1-\alpha\big)\cdot100ns\\
+                    .2ms = \alpha\cdot\bigg(\big(8ms\big)\cdot30\%+\big(20ms\big)\cdot70\%\bigg)+.0001ms-\alpha\cdot.0001ms\\
+                    .0001ms = \alpha\cdot\bigg(\big(8ms\big)\cdot30\%+\big(20ms\big)\cdot70\%-.0001ms\bigg)\\
+                    \alpha = \frac{.0001ms}{\bigg(\big(8ms\big)\cdot30\%+\big(20ms\big)\cdot70\%-.0001ms\bigg)}=\frac{100}{163999}=6.0975\cdot10^{-4}\%\\
+                \end{gathered}
+            \end{equation*}
+        }
+
 		\item Consider the following page reference string:
 		\begin{figure*}[h]
 			\centering
@@ -230,7 +298,7 @@
 			\item How is the logical-to-physical address mapping accomplished in this system? (For the indexed allocation, assume that a file is always less than 512 blocks long)
 			\item If we are currently at logical block 10 (the last block accessed was block 10) and want to access logical block 4, how many physical blocks must be read from the disk?
 		\end{enumerate}
-		
+
 	\end{enumerate}
 	\section{Workshop 9}
 	\begin{enumerate}
