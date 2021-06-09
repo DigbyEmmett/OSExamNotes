@@ -1,6 +1,9 @@
 \documentclass{article}
 \usepackage[margin=.5in,a5paper]{geometry}
 \usepackage{multicol}
+\usepackage[dvipsnames]{xcolor}
+\newcommand{\answercolor}{Bittersweet}
+\newcommand{\answer}[1]{\\\\\textcolor{\answercolor}{#1}\\}
 \begin{document}
 	\section{Worksheet 5}
 	\begin{enumerate}
@@ -146,12 +149,15 @@
 	\section{Worksheet 7}
 	\begin{enumerate}
 		\item Briefly describe the following terms:
-		\begin{multicols}{2}
 			\begin{itemize}
 				\item Virtual Memory
+				\answer{Utilises secondary storage to act as an extension to main memory. Pages can be stored in virtual memory when the system is experiencing a high load. Secondary storage allows for processes which are not being used to not take up space in main memory.}
 				\item Thrashing
+				\answer{When a process does not have all of its frames in memory it may cause page faults thus loading in more pages in from secondary storage. This results in low CPU utilisation while the pages are loaded. If the CPU then increases the level of multiprogramming to compensate the same will happen again. This is known as thrashing.}
 				\item Demand Paging
+				\textcolor{Bittersweet}{Bringing an entire process (not just a page) into memory only when it is needed \& advantageous for the computer. (less IO, less memory, faster response, more users)}
 				\item Page Fault
+				\answer{Occurs when a page is requested but it is not found in main memory. It is necessary to load the page from virtual memory which takes additional time.}
 				\item Page Replacement
 				\item Modify/dirty bit
 				\item Vaild/invalid bit
@@ -160,7 +166,6 @@
 				\item Working set model
 				\item Lock bit
 			\end{itemize}
-		\end{multicols}
 		\item When do page faults occur? Describe the actions taken by the OS when a page fault occurs
 		\item A certain computer provides its users with a virtual-memory space of 232 bytes. The computer has 218 bytes of physical memory. The virtual memory is implemented by paging, and the page size is 4096 bytes. A user process generates the virtual address 11123456H. Explain how the system establishes the corresponding physical location.
 		\item Suppose we have a demand-paged memory. The page table is held in registers. It takes 8ms to service a page faults if an empty page is available or the replaced page is not modified, and 20ms if the replaced page is modified. Memory access time is 100ns. Assume that the page to be replaced is modified 70\% of the time. What is the maximum acceptable page- fault rate for an effective access time of no more than 200ns?
