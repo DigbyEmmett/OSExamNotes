@@ -166,7 +166,18 @@
 		\item Consider a logical address space of eight pages of 1024 words each, mapped onto a physical memory of 32 frames
 		\begin{enumerate}
 			\item How many bits are there in the logical address?
+            \answer{
+                To answer this we need to calculate the amount of space available in the logical address:
+                $8\equiv2^3$ pages of $2^{10}$
+                \[2^3 \cdot 2^{10} = 2^{13}\]
+                $13$ bits
+            }
 			\item How many bits are there in the physical address?
+            \answer{
+                The total number of bits in the physical address is given by:
+                \[ 2^{5}\cdot2^{10}=2^{15}\]\\
+                $15$ bits
+            }
 		\end{enumerate}
 		\item Considering the following segment table, what are the physical addresses of the following logical addresses?
 		\begin{table*}[h]
@@ -180,15 +191,13 @@
 				4       & 1952 & 96     \\
 			\end{tabular}
 		\end{table*}
-		\begin{multicols}{2}
-			\begin{enumerate}
-				\item 0, 430
-				\item 1, 10
-				\item 2, 500
-				\item 3, 400
-				\item 4, 112
-			\end{enumerate}
-		\end{multicols}
+		\begin{enumerate}
+			\item 0, 430
+			\item 1, 10
+			\item 2, 500
+			\item 3, 400
+			\item 4, 112
+		\end{enumerate}
 	\end{enumerate}
 	\section{Worksheet 7}
 	\begin{enumerate}
@@ -230,12 +239,9 @@
         }
 		\item A certain computer provides its users with a virtual-memory space of $2^{32}$ bytes. The computer has $2^{18}$ bytes of physical memory. The virtual memory is implemented by paging, and the page size is 4096 bytes. A user process generates the virtual address 11123456H. Explain how the system establishes the corresponding physical location.
         \answer{
-        The virtual address in binary form is
-        \begin{figure}
-            \centering
-            0001 0001 0001 0010 0011 0100 0101 0110
-        \end{figure}
-        Since the page size is $2^{12} \equiv 4kB$  , the page table size is $2^{20}$. Therefore the low order 12 bits “0100 0101 0110” are used as the displacement into the page, while the remaining 20 bits “0001 0001 0001 0010 0011” are used as the displacement in the page table to find the frame.
+        The virtual address in binary form is:
+            0001 0001 0001 0010 0011 0100 0101 0110\\
+        Since the page size is $2^{12} \equiv 4kB$  , the page table size is $2^{20}$. Therefore the low order 12 bits “0100 0101 0110” are used as the displacement into the page, while the remaining 20 bits “0001 0001 0001 0010 0011” are used as the displacement in the page table to locate the frame.
         }
 		\item Suppose we have a demand-paged memory. The page table is held in registers. It takes 8ms to service a page faults if an empty page is available or the replaced page is not modified, and 20ms if the replaced page is modified. Memory access time is 100ns. Assume that the page to be replaced is modified 70\% of the time. What is the maximum acceptable page fault rate for an effective access time of no more than 200ns?
         \answer{
@@ -255,11 +261,14 @@
 			1, 2, 3, 4, 2, 1, 5, 6, 2, 1, 2, 3, 7, 6, 3, 2, 1, 2, 3, 6
 		\end{figure*}\\
 		How many page faults would occur for the following replacement algorithms, assuming one, two, three, four, five, six, or seven frames? Remember that all frames are initially empty, so your first unique pages will all cost one fault each.
+        \answerimg{T7Q1}
 		\begin{enumerate}
 			\item LRU replacement
 			\item FIFO replacement
 			\item Optimal Replacement
+
 		\end{enumerate}
+
 		\item What cause thrashing? How does the system detect thrashing? Once it detects thrashing what can the system do to eliminate thrashing?
 		\item Consider a demand-paging system with a paging disk that has an average access and transfer time of 20 milliseconds. Addresses are translated through a page table in main memory with an access time of 1 microsecond per memory access. Thus, each memory reference through the page table takes two accesses. To improve this time, we have added an associative memory that reduces access time to one memory reference, if the page-table entry is in associative memory. Assume that 80\% of the accesses are in the associative memory, and that, of the remaining 10\% (or 2\% of the total) cause page faults. What is the effective access time?
 		\item An OS supports a paged virtual memory, using a central processor with a cycle time of 1 microsecond. It costs an additional 1 microsecond to access a page other than the current one. Pages have 1000 words, and the paging device is a drum that rotates at 3000 RPM and transfers 1 million words per second. The following statistical measurements were obtained from the system:
@@ -269,6 +278,32 @@
 			\item When a new page was required, the replaced page was modified 50 percent of the time.
 		\end{itemize}
 		Calculate the effective instruction time on the system, assuming that the system is running one process only, and that the processor is idle during drum transfers.
+        \answer{
+            \begin{enumerate}
+                \item Time per page to controller: \[10^6\cdot\frac{word}{sec}\cdot\frac{1}{10^3}\frac{page}{word}= 10^3\cdot\frac{page}{sec}\]\\
+                \[T_a=\frac{1}{10^3}\frac{sec}{page} = 1000\frac{\mu s}{page}\]
+                \item Time per page to/from disk: \[\frac{3000}{1}\cdot\frac{rev}{min}\cdot\frac{1}{60}\cdot\frac{min}{sec}=50\frac{rev}{sec} = \frac{1}{50}\cdot\frac{sec}{rev}\]\\
+                \[T_b=\mu= \frac{0.02}{2}=0.01\frac{sec}{page}\]
+                \item effective read write time per page to disk
+                \[T_t=T_a+T_b=11000\frac{\mu s}{page}\]
+                \item \textbf{same} page (one memory access) $99\%$
+                \[T_1=99\%\cdot 1 \mu s=.99\mu s\]
+                \item \textbf{different page} $(1\%)$
+                \begin{enumerate}
+                    \item In memory (two memory accesses) $(80\%)$
+                    \[T_2 = 1\%\cdot80\%\cdot(2\mu s) = 0.016\mu s\]
+                    \item Not in memory $(20\%)$
+                        \begin{enumerate}
+                            \item Victim needs replacement (2 disk operations) $(50\%)$
+                            \[T_3=1\%\cdot20\%\cdot50\%\cdot (11000\cdot 2\mu s) = 22 \mu s\]
+                            \item Victim does not need replacement (1 disk operation) $(50\%)$
+                            \[T_4=1\%\cdot20\%\cdot50\%\cdot(11000\mu s) = 11\mu s\]
+                        \end{enumerate}
+                \end{enumerate}
+                \item Result
+                \[T=34.006\mu s\]
+            \end{enumerate}
+        }
 		\item Consider a demand-paged computer system where the degree of multiprogramming is currently fixed at four. The system was recently measured to determine utilization of CPU and the paging disk. The results are one of the following alternatives. For each case, what is happening? Can the degree of multiprogramming be increased to increase the CPU utilization?
 		\begin{enumerate}
 			\item CPU utilization 13\%; disk utilization 97\%
